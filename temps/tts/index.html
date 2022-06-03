@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block con %}
+
+    <div class="container mt-5 mb-5">
+        <h1><b>텍스트 음성 변환</b></h1>
+
+        <form method="post" name="tts">
+            {% csrf_token %}
+            <div class="row mt-5 text-center">
+                <div class="col-lg-8">
+                    <textarea name="iw" class="form-control" style="height: 150px;" plasceholder="Input what you want">{{ iw }}</textarea>
+                </div>
+                <div class="col-lg-4">
+                    <textarea name="fname" class="form-control" type="text" placeholder="File Name">{{ fname }}</textarea>
+                    <button type="button" onclick="check()" class="btn btn-primary mt-5">변환</button>
+                    <a href="/media/audio/{{ tf }}" download class="btn btn-dark mt-5">다운로드</a>
+<!--                    <a href="/{{ tf }}" download class="btn btn-dark mt-5">다운로드</a>     -->
+                </div>
+
+            </div>
+        </form>
+    <script>
+        function check(){
+            tt = document.tts;
+            if(!tt.iw.value){
+                alert("내용을 입력하세요!");
+            }else if(!tt.fname.value){
+                alert("파일명을 입력하세요!");
+            }else{
+                tt.submit();
+            }    
+        }
+    </script>
+
+    
+{% endblock %}
